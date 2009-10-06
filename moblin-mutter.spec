@@ -82,44 +82,41 @@ files to allow you to develop with Mutter.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT %name.lang
+rm -rf $RPM_BUILD_ROOT %oname.lang
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 
-%find_lang %{name} 
+%find_lang %{oname} 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%define schemas %name
+%define schemas %oname
 
 %preun
 %preun_uninstall_gconf_schemas %{schemas}
 
-%files -f %{name}.lang
+%files -f %{oname}.lang
 %defattr(-,root,root)
 %doc README COPYING NEWS HACKING 
 %{_sysconfdir}/gconf/schemas/*
 %{_bindir}/*
-%{_datadir}/applications/%name.desktop
-%{_datadir}/gnome/wm-properties/%name-wm.desktop
-%{_datadir}/%name
-%dir %_libdir/%name
-%dir %_libdir/%name/plugins
-%_libdir/%name/plugins/default.so
+%{_datadir}/applications/%oname.desktop
+%{_datadir}/gnome/wm-properties/%oname-wm.desktop
+%{_datadir}/%oname
+%dir %_libdir/%oname
+%dir %_libdir/%oname/plugins
+%_libdir/%oname/plugins/default.so
 %{_mandir}/man1/*
 
 %files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/*.so.%{lib_major}*
-%_libdir/%name/Meta-2.27.typelib
 
 %files -n %{libnamedev}
 %defattr(-,root,root)
 %doc ChangeLog
 %{_libdir}/*.so
-%{_libdir}/*.a
 %{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
-%_libdir/%name/Meta-2.27.gir
 
