@@ -3,6 +3,11 @@
 %define libnamedev %mklibname -d %{name}-private
 %define startup_notification_version 0.4
 
+%define oname mutter
+%define olibname %mklibname %{oname}-private %{lib_major}
+%define olibnamedev %mklibname -d %{oname}-private
+
+%define name moblin-%{oname}
 %define version 2.27.4
 %define moblin_version 0.4
 %define sversion %{version}_%{moblin_version}
@@ -10,11 +15,11 @@
 %define release %mkrel %{moblin_version}.%{rel}
 
 Summary: Mutter window manager
-Name: mutter
+Name: %{name}
 Version: %{version}
 Release: %{release}
 URL: http://www.moblin.org
-Source0: http://ftp.gnome.org/pub/GNOME/sources/mutter/%{name}-%{sversion}.tar.bz2
+Source0: http://ftp.gnome.org/pub/GNOME/sources/mutter/%{oname}-%{sversion}.tar.bz2
 Patch0: metacity-glib-log-handler.patch
 License: GPLv2+
 Group: Graphical desktop/GNOME
@@ -38,6 +43,9 @@ BuildRequires: libcanberra-devel
 BuildRequires: gobject-introspection-devel gir-repository
 BuildRequires: clutter-devel >= 1.0
 
+Conflicts: %{oname}
+Requires: %{libname}
+
 
 %description
 Mutter is a simple window manager that integrates nicely with 
@@ -46,6 +54,7 @@ GNOME 2.
 %package -n %{libname}
 Summary:        Libraries for Mutter
 Group:          System/Libraries
+Conflicts:	%{olibname}
 
 %description -n %{libname}
 This package contains libraries used by Mutter.
@@ -57,6 +66,7 @@ Requires:       %name = %{version}
 Requires:		%{libname} = %{version}
 Provides:		%{name}-devel = %{version}-%{release}
 Provides:		lib%{name}-private-devel = %{version}-%{release}
+Conflicts:		%{olibnamedev}
 
 %description -n %{libnamedev}
 This package provides the necessary development libraries and include 
@@ -64,7 +74,7 @@ files to allow you to develop with Mutter.
 
 
 %prep
-%setup -q -n %{name}-%{sversion}
+%setup -q -n %{oname}-%{sversion}
 %patch0 -p1 -b .metacity-glib-log-handler
 
 %build
