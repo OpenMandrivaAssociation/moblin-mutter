@@ -3,12 +3,19 @@
 %define libnamedev %mklibname -d %{name}-private
 %define startup_notification_version 0.4
 
+%define version 2.27.4
+%define moblin_version 0.4
+%define sversion %{version}_%{moblin_version}
+%define rel 1
+%define release %mkrel %{moblin_version}.%{rel}
+
 Summary: Mutter window manager
 Name: mutter
-Version: 2.27.5
-Release: %mkrel 1
-URL: http://ftp.gnome.org/pub/gnome/sources/mutter/
-Source0: http://ftp.gnome.org/pub/GNOME/sources/mutter/%{name}-%{version}.tar.bz2
+Version: %{version}
+Release: %{release}
+URL: http://www.moblin.org
+Source0: http://ftp.gnome.org/pub/GNOME/sources/mutter/%{name}-%{sversion}.tar.bz2
+Patch0: metacity-glib-log-handler.patch
 License: GPLv2+
 Group: Graphical desktop/GNOME
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
@@ -50,7 +57,6 @@ Requires:       %name = %{version}
 Requires:		%{libname} = %{version}
 Provides:		%{name}-devel = %{version}-%{release}
 Provides:		lib%{name}-private-devel = %{version}-%{release}
-Obsoletes: %mklibname -d %{name}-private 0
 
 %description -n %{libnamedev}
 This package provides the necessary development libraries and include 
@@ -58,10 +64,11 @@ files to allow you to develop with Mutter.
 
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{sversion}
+%patch0 -p1 -b .metacity-glib-log-handler
 
 %build
-%configure2_5x 
+%configure2_5x --with-clutter --disable-xinerama --without-introspection --disable-static
 %make
 
 %install
