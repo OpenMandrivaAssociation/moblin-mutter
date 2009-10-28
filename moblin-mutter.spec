@@ -8,8 +8,8 @@
 %define olibnamedev %mklibname -d %{oname}-private
 
 %define name moblin-%{oname}
-%define version 2.27.4
-%define moblin_version 0.4
+%define version 2.27.5
+%define moblin_version 0.0
 %define sversion %{version}_%{moblin_version}
 %define rel 1
 %define release %mkrel %{moblin_version}.%{rel}
@@ -19,7 +19,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 URL: http://www.moblin.org
-Source0: http://ftp.gnome.org/pub/GNOME/sources/mutter/%{oname}-%{sversion}.tar.bz2
+Source0: http://git.moblin.org/cgit.cgi/%{oname}/snapshot/%{oname}-%{sversion}.tar.bz2
 Patch0: metacity-glib-log-handler.patch
 License: GPLv2+
 Group: Graphical desktop/GNOME
@@ -78,6 +78,7 @@ files to allow you to develop with Mutter.
 %patch0 -p1 -b .metacity-glib-log-handler
 
 %build
+NOCONFIGURE=nil ./autogen.sh
 %configure2_5x --with-clutter --disable-xinerama --without-introspection --disable-static
 %make
 
