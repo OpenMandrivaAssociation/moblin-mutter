@@ -42,6 +42,7 @@ BuildRequires: gnome-doc-utils
 BuildRequires: libcanberra-devel
 BuildRequires: gobject-introspection-devel gir-repository
 BuildRequires: clutter-devel >= 1.0
+BuildRequires: gnome-common
 
 Conflicts: %{oname}
 Requires: %{libname}
