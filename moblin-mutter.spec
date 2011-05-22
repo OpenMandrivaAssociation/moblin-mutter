@@ -11,7 +11,7 @@
 %define version 2.27.5
 %define moblin_version 0.0
 %define sversion %{version}_%{moblin_version}
-%define rel 2
+%define rel 3
 %define release %mkrel %{moblin_version}.%{rel}
 
 Summary: Mutter window manager
