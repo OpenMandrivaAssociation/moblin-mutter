@@ -18,7 +18,7 @@ Summary: Mutter window manager
 Name: %{name}
 Version: %{version}
 Release: %{release}
-URL: http://www.moblin.org
+URL: https://www.moblin.org
 Source0: http://git.moblin.org/cgit.cgi/%{oname}/snapshot/%{oname}-%{sversion}.tar.bz2
 Patch0: metacity-glib-log-handler.patch
 License: GPLv2+
