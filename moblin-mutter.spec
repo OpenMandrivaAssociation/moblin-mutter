@@ -25,6 +25,11 @@ License: GPLv2+
 Group: Graphical desktop/GNOME
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Requires: zenity
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel >= 1.1.9
 BuildRequires: startup-notification-devel >= %{startup_notification_version}
